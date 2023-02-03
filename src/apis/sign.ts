@@ -12,7 +12,6 @@ export const PostSignUp = async (data: SignInfo) => {
     return true;
   } catch (error: any) {
     alert(error.response.data.message);
-    console.error(error);
   }
 };
 
@@ -31,25 +30,23 @@ export const GetSignIn = async (data: SignInfo) => {
     return true;
   } catch (error: any) {
     alert(error.response.data.message);
-    console.error(error);
   }
 };
 
 export const PostCreateTodo = async (data: any) => {
   try {
-    const res = await axios.post(
-      "https://pre-onboarding-selection-task.shop/todos",
-      data,
-      {
+    const res = await axios
+      .create({
+        timeout: 1000,
+      })
+      .post("https://pre-onboarding-selection-task.shop/todos", data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("AccessToken")}`,
           "Content-Type": "application/json",
         },
-      }
-    );
+      });
   } catch (error: any) {
     alert(error.response.data.message);
-    console.error(error);
   }
 };
 
@@ -68,14 +65,13 @@ export const GetToDos = async () => {
     return res.data;
   } catch (error: any) {
     alert(error.response.data.message);
-    console.error(error);
   }
 };
 
-export const PutUpdateToDo = async (data: ToDos, id: number) => {
+export const PutUpdateToDo = async (data: any, id: number) => {
   try {
     const res = await axios.put(
-      `https://pre-onboarding-selection-task.shop/todos:${id}`,
+      `https://pre-onboarding-selection-task.shop/todos/:${id}`,
       data,
       {
         headers: {
@@ -86,23 +82,21 @@ export const PutUpdateToDo = async (data: ToDos, id: number) => {
     );
   } catch (error: any) {
     alert(error.response.data.message);
-    console.error(error);
   }
 };
 
 export const DeleteToDo = async (id: number) => {
   try {
     const res = await axios.delete(
-      `https://pre-onboarding-selection-task.shop/todos:${id}`,
+      `https://pre-onboarding-selection-task.shop/todos/:${id}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("AccessToken")}`,
-          "Content-Type": "application/json",
         },
       }
     );
+    return res;
   } catch (error: any) {
     alert(error.response.data.message);
-    console.error(error);
   }
 };
