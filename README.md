@@ -1,3 +1,7 @@
+한성린 / wanted-pre-onboarding-frontend 과제
+
+[배포사이트](fabulous-cheesecake-9a133e.netlify.app)
+
 # 1. 로그인 / 회원가입
 
 - [x] /signup 경로에 회원가입 기능을 개발해주세요
