@@ -77,7 +77,7 @@ const Todo = () => {
     if (!localStorage.getItem("AccessToken")) {
       navigate("/signin");
     } else GetToDos().then((res) => handleToDos(res));
-  }, [refetch]);
+  }, [refetch, navigate]);
 
   return (
     <div>
