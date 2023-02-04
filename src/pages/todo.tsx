@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   GetToDos,
   PostCreateTodo,
@@ -9,6 +9,7 @@ import {
 import { ToDos } from "../types/todos";
 
 const Todo = () => {
+  const navigate = useNavigate();
   const [toDos, setToDos] = useState<ToDos[]>([]);
   const [isModifying, setIsModifying] = useState<any>(null);
   const [refetch, setRefetch] = useState(false);
@@ -73,7 +74,9 @@ const Todo = () => {
   };
 
   useEffect(() => {
-    GetToDos().then((res) => handleToDos(res));
+    if (!localStorage.getItem("AccessToken")) {
+      navigate("/signin");
+    } else GetToDos().then((res) => handleToDos(res));
   }, [refetch]);
 
   return (

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { ToDos } from "../types/todos";
 import { SignInfo } from "../types/signs";
 
 export const PostSignUp = async (data: SignInfo) => {
@@ -45,6 +44,7 @@ export const PostCreateTodo = async (data: any) => {
           "Content-Type": "application/json",
         },
       });
+    return res;
   } catch (error: any) {
     alert(error.response.data.message);
   }
@@ -80,6 +80,7 @@ export const PutUpdateToDo = async (data: any, id: number) => {
         },
       }
     );
+    return res;
   } catch (error: any) {
     alert(error.response.data.message);
   }
