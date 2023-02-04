@@ -71,7 +71,7 @@ export const GetToDos = async () => {
 export const PutUpdateToDo = async (data: any, id: number) => {
   try {
     const res = await axios.put(
-      `https://pre-onboarding-selection-task.shop/todos/:${id}`,
+      `https://pre-onboarding-selection-task.shop/todos/${id}`,
       data,
       {
         headers: {
@@ -88,7 +88,7 @@ export const PutUpdateToDo = async (data: any, id: number) => {
 export const DeleteToDo = async (id: number) => {
   try {
     const res = await axios.delete(
-      `https://pre-onboarding-selection-task.shop/todos/:${id}`,
+      `https://pre-onboarding-selection-task.shop/todos/${id}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("AccessToken")}`,

@@ -49,6 +49,7 @@ const Todo = () => {
       return;
     }
     await PutUpdateToDo({ ...el, todo: modifyInput }, el.id);
+    handleDoRefetch();
     setIsModifying(null);
   };
 
@@ -61,8 +62,8 @@ const Todo = () => {
   };
 
   // 리스트 삭제
-  const handleDelete = (id: number) => {
-    DeleteToDo(id);
+  const handleDelete = async (id: number) => {
+    await DeleteToDo(id);
     handleDoRefetch();
   };
 
@@ -98,6 +99,7 @@ const Todo = () => {
                   type="checkbox"
                   name="isCompleted"
                   onChange={(e) => handleCheckBox(e, el)}
+                  checked={el.isCompleted}
                 />
               </label>
               {isModifying === id ? (
