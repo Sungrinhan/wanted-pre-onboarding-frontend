@@ -27,7 +27,7 @@ const Todo = () => {
 
   // 새로운 리스트 추가
   const handleSubmit = async () => {
-    if (!newToDo) {
+    if (!newToDo.trim()) {
       alert("빈칸은 추가할 수 없습니다.");
       return;
     }
@@ -78,8 +78,13 @@ const Todo = () => {
       navigate("/signin");
     } else {
       GetToDos().then((res) => {
-        console.log(res);
-        handleToDos(res);
+        console.log(typeof res);
+        if (Array.isArray(res)) handleToDos(res);
+        else if (res.response?.status === 401) {
+          localStorage.clear();
+          navigate("/signin");
+        } else {
+        }
       });
     }
   }, [refetch, navigate]);

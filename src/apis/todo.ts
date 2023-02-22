@@ -1,71 +1,42 @@
-import axios from "axios";
+import { AuthorizedUser } from "./axiosinstace";
 
 export const PostCreateTodo = async (data: any) => {
   try {
-    const res = await axios
-      .create({
-        timeout: 1000,
-      })
-      .post("https://pre-onboarding-selection-task.shop/todos", data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("AccessToken")}`,
-          "Content-Type": "application/json",
-        },
-      });
+    const res = await AuthorizedUser.post("/todos", data);
     return res;
   } catch (error: any) {
     alert(error.response.data.message);
+    return error;
   }
 };
 
 export const GetToDos = async () => {
   try {
-    const res = await axios.get(
-      "https://pre-onboarding-selection-task.shop/todos",
-
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("AccessToken")}`,
-        },
-      }
-    );
+    const res = await AuthorizedUser.get("/todos");
 
     return res.data;
   } catch (error: any) {
-    alert(error.response.data.message);
+    // alert(error.response.data.message);
+    return error;
   }
 };
 
 export const PutUpdateToDo = async (data: any, id: number) => {
   try {
-    const res = await axios.put(
-      `https://pre-onboarding-selection-task.shop/todos/${id}`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("AccessToken")}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await AuthorizedUser.put(`/todos/${id}`, data);
     return res;
   } catch (error: any) {
     alert(error.response.data.message);
+    return error;
   }
 };
 
 export const DeleteToDo = async (id: number) => {
   try {
-    const res = await axios.delete(
-      `https://pre-onboarding-selection-task.shop/todos/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("AccessToken")}`,
-        },
-      }
-    );
+    const res = await AuthorizedUser.delete(`/todos/${id}`);
     return res;
   } catch (error: any) {
     alert(error.response.data.message);
+    return error;
   }
 };
