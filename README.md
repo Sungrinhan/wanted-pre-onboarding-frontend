@@ -1,6 +1,6 @@
 한성린 / wanted-pre-onboarding-frontend 과제
 
-[배포사이트](fabulous-cheesecake-9a133e.netlify.app)
+[배포사이트](https://darling-begonia-e79ff7.netlify.app)
 
 # 1. 로그인 / 회원가입
 

@@ -22,6 +22,7 @@ const SingIn = () => {
   const handleChange = (e: any) =>
     setValues({ ...values, [e.target.name]: e.target.value });
   const handleErrors = (value: any) => setErrors(value);
+
   const onDisabled = () => setDisabled(true);
   const offDisabled = () => setDisabled(false);
 
@@ -40,7 +41,7 @@ const SingIn = () => {
     else onDisabled();
   }, [values]);
 
-  // 로컬스토리지에 accesstoken 있으면
+  // 로컬스토리지에 accesstoken 있으면 todo 로 이동
   useEffect(() => {
     if (localStorage.getItem("AccessToken")) navigate("/todo");
   }, [navigate]);

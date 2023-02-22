@@ -76,7 +76,12 @@ const Todo = () => {
   useEffect(() => {
     if (!localStorage.getItem("AccessToken")) {
       navigate("/signin");
-    } else GetToDos().then((res) => handleToDos(res));
+    } else {
+      GetToDos().then((res) => {
+        console.log(res);
+        handleToDos(res);
+      });
+    }
   }, [refetch, navigate]);
 
   return (
