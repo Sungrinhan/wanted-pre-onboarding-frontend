@@ -7,7 +7,7 @@ const SingIn = () => {
   const navigate = useNavigate();
 
   // input 에 입력된 값
-  const [values, setValues] = useState({
+  const [form, setForm] = useState({
     email: "",
     password: "",
   });
@@ -20,7 +20,7 @@ const SingIn = () => {
   const [disabled, setDisabled] = useState(true);
 
   const handleChange = (e: any) =>
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   const handleErrors = (value: any) => setErrors(value);
 
   const onDisabled = () => setDisabled(true);
@@ -28,18 +28,18 @@ const SingIn = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await GetSignIn(values);
+    const res = await GetSignIn(form);
     // 로그인이 완료되면 todo 으로 라우터 이동
     if (res) navigate("/todo");
   };
 
   useEffect(() => {
-    const errors = validate(values);
+    const errors = validate(form);
     handleErrors(errors);
 
     if (!errors.email && !errors.password) offDisabled();
     else onDisabled();
-  }, [values]);
+  }, [form]);
 
   // 로컬스토리지에 accesstoken 있으면 todo 로 이동
   useEffect(() => {
@@ -54,7 +54,7 @@ const SingIn = () => {
           data-testid="email-input"
           type="text"
           name="email"
-          value={values.email}
+          value={form.email}
           onChange={handleChange}
         />
         {errors.email && <span>{errors.email}</span>}
@@ -62,7 +62,7 @@ const SingIn = () => {
           data-testid="password-input"
           type="password"
           name="password"
-          value={values.password}
+          value={form.password}
           onChange={handleChange}
         />
         {errors.password && <span>{errors.password}</span>}

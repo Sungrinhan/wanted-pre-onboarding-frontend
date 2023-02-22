@@ -4,10 +4,10 @@ export const validate = (values: any) => {
     password: "",
   };
 
-  if (!values.email.includes("@")) {
+  if (values.email && !values.email.includes("@")) {
     errors.email = "이메일에는 @ 가 들어가야 합니다.  ";
   }
-  if (values.password.length < 8) {
+  if (values.password && values.password.length < 8) {
     errors.password = "비밀번호는 8글자 이상입니다.";
   }
 
