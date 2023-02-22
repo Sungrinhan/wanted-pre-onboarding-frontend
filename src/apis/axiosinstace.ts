@@ -3,7 +3,7 @@ import axios from "axios";
 export const URL = "https://pre-onboarding-selection-task.shop/";
 
 export const UnAuthorizedUser = axios.create({
-  baseURL: "URL",
+  baseURL: URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -12,7 +12,7 @@ export const UnAuthorizedUser = axios.create({
 const token = localStorage.getItem("AccessToken");
 
 export const AuthorizedUser = axios.create({
-  baseURL: "URL",
+  baseURL: URL,
   headers: { Authorization: `Bearer ${token}` },
 });
 
