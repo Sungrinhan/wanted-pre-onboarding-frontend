@@ -1,22 +1,19 @@
 import axios from "axios";
 
-export const URL = "https://pre-onboarding-selection-task.shop/";
+export const BASE_URL = process.env.REACT_APP_API_URL;
 
-export const UnAuthorizedUser = axios.create({
-  baseURL: URL,
+const api = axios.create({
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-const token = localStorage.getItem("AccessToken");
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("AccessToken");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
 
-export const AuthorizedUser = axios.create({
-  baseURL: URL,
-  headers: { Authorization: `Bearer ${token}` },
+  return config;
 });
 
-AuthorizedUser.interceptors.response.use(
-  (res) => res,
-  (err) => Promise.reject(err)
-);
+export default api;

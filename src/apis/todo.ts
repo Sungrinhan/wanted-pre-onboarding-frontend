@@ -1,8 +1,8 @@
-import { AuthorizedUser } from "./axiosinstace";
+import api from "./axiosinstace";
 
 export const PostCreateTodo = async (data: any) => {
   try {
-    const res = await AuthorizedUser.post("/todos", data);
+    const res = await api.post("/todos", data);
     return res;
   } catch (error: any) {
     alert(error.response.data.message);
@@ -12,7 +12,7 @@ export const PostCreateTodo = async (data: any) => {
 
 export const GetToDos = async () => {
   try {
-    const res = await AuthorizedUser.get("/todos");
+    const res = await api.get("/todos");
 
     return res.data;
   } catch (error: any) {
@@ -23,7 +23,7 @@ export const GetToDos = async () => {
 
 export const PutUpdateToDo = async (data: any, id: number) => {
   try {
-    const res = await AuthorizedUser.put(`/todos/${id}`, data);
+    const res = await api.put(`/todos/${id}`, data);
     return res;
   } catch (error: any) {
     alert(error.response.data.message);
@@ -33,7 +33,7 @@ export const PutUpdateToDo = async (data: any, id: number) => {
 
 export const DeleteToDo = async (id: number) => {
   try {
-    const res = await AuthorizedUser.delete(`/todos/${id}`);
+    const res = await api.delete(`/todos/${id}`);
     return res;
   } catch (error: any) {
     alert(error.response.data.message);

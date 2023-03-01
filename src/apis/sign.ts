@@ -1,9 +1,9 @@
 import { SignInfo } from "../types/signs";
-import { UnAuthorizedUser } from "./axiosinstace";
+import api from "./axiosinstace";
 
 export const PostSignUp = async (data: SignInfo) => {
   try {
-    await UnAuthorizedUser.post("/auth/signup", {
+    await api.post("/auth/signup", {
       email: data.email,
       password: data.password,
     });
@@ -16,13 +16,13 @@ export const PostSignUp = async (data: SignInfo) => {
 
 export const GetSignIn = async (data: SignInfo) => {
   try {
-    const res = await UnAuthorizedUser.post("/auth/signin", {
+    const res = await api.post("/auth/signin", {
       email: data.email,
       password: data.password,
     });
-    alert("로그인이 완료되었습니다. todo 페이지로 이동합니다.");
     const AccessToken = res.data.access_token;
-    localStorage.setItem("AccessToken", AccessToken);
+    await localStorage.setItem("AccessToken", AccessToken);
+    // alert("로그인이 완료되었습니다. todo 페이지로 이동합니다.");
     return true;
   } catch (error: any) {
     alert(error.response.data.message);

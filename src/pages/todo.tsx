@@ -78,7 +78,6 @@ const Todo = () => {
       navigate("/signin");
     } else {
       GetToDos().then((res) => {
-        console.log(typeof res);
         if (Array.isArray(res)) handleToDos(res);
         else if (res.response?.status === 401) {
           localStorage.clear();

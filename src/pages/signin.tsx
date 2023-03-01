@@ -3,6 +3,7 @@ import { GetSignIn } from "../apis/sign";
 import { useEffect, useState } from "react";
 import { validate } from "../utils/sign";
 import { useNavigate } from "react-router-dom";
+
 const SingIn = () => {
   const navigate = useNavigate();
 
@@ -17,6 +18,12 @@ const SingIn = () => {
     password: "",
   });
 
+  // form , setForm, handleChange 함수를 한곳으로 모은 hook
+  // const [form, handleChange] = useInput({
+  //   email: "",
+  //   password: "",
+  // });
+
   const [disabled, setDisabled] = useState(true);
 
   const handleChange = (e: any) =>
@@ -29,6 +36,7 @@ const SingIn = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const res = await GetSignIn(form);
+
     // 로그인이 완료되면 todo 으로 라우터 이동
     if (res) navigate("/todo");
   };
