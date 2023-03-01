@@ -3,15 +3,11 @@ import { GetSignIn } from "../apis/sign";
 import { useEffect, useState } from "react";
 import { validate } from "../utils/sign";
 import { useNavigate } from "react-router-dom";
+import useInput from "../hooks/useInput";
 
 const SingIn = () => {
   const navigate = useNavigate();
 
-  // input 에 입력된 값
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
   // 각 input 에 대한 error 값
   const [errors, setErrors] = useState({
     email: "",
@@ -19,15 +15,13 @@ const SingIn = () => {
   });
 
   // form , setForm, handleChange 함수를 한곳으로 모은 hook
-  // const [form, handleChange] = useInput({
-  //   email: "",
-  //   password: "",
-  // });
+  const [form, handleChange] = useInput({
+    email: "",
+    password: "",
+  });
 
   const [disabled, setDisabled] = useState(true);
 
-  const handleChange = (e: any) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
   const handleErrors = (value: any) => setErrors(value);
 
   const onDisabled = () => setDisabled(true);
