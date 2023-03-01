@@ -3,12 +3,12 @@ import { PostSignUp } from "../apis/sign";
 import { useEffect, useState } from "react";
 import { validate } from "../utils/sign";
 import { useNavigate } from "react-router-dom";
+import useInput from "src/hooks/useInput";
 
 const SingUp = () => {
   const navigate = useNavigate();
 
-  // input 에 입력된 값
-  const [values, setValues] = useState({
+  const [form, handleChange] = useInput({
     email: "",
     password: "",
   });
@@ -20,15 +20,13 @@ const SingUp = () => {
 
   const [disabled, setDisabled] = useState(true);
 
-  const handleChange = (e: any) =>
-    setValues({ ...values, [e.target.name]: e.target.value });
   const handleErrors = (value: any) => setErrors(value);
   const onDisabled = () => setDisabled(true);
   const offDisabled = () => setDisabled(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await PostSignUp(values);
+    const res = await PostSignUp(form);
     // 회원가입이 완료되면 signin 으로 라우터 이동
     if (res) navigate("/signin");
   };
@@ -39,12 +37,12 @@ const SingUp = () => {
   }, [navigate]);
 
   useEffect(() => {
-    const errors = validate(values);
+    const errors = validate(form);
     handleErrors(errors);
 
     if (!errors.email && !errors.password) offDisabled();
     else onDisabled();
-  }, [values]);
+  }, [form]);
 
   return (
     <div>
@@ -54,7 +52,7 @@ const SingUp = () => {
           data-testid="email-input"
           type="text"
           name="email"
-          value={values.email}
+          value={form.email}
           onChange={handleChange}
         />
         {errors.email && <span>{errors.email}</span>}
@@ -62,7 +60,7 @@ const SingUp = () => {
           data-testid="password-input"
           type="password"
           name="password"
-          value={values.password}
+          value={form.password}
           onChange={handleChange}
         />
         {errors.password && <span>{errors.password}</span>}
